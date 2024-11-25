@@ -3,6 +3,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
+import { ChangeUserPasswordDto } from '../dto/change-user-password.dto';
 
 @Controller('auth')
 export class AuthenticationController {
@@ -20,9 +21,16 @@ export class AuthenticationController {
     return verifiedUser.toPOJO();
   }
 
+  // Вопрос - не логичнее ли вместо auth/:id сделать маршрут users/:id?
   @Get(':id')
   public async show(@Param('id') id: string) {
     const existUser = await this.authService.getUser(id);
     return existUser.toPOJO();
+  }
+
+  @Post('/:id/change-password')
+  public async changePassword(@Param('id') id: string, @Body() dto: ChangeUserPasswordDto) {
+    const user = await this.authService.changePassword(id, dto);
+    return user.toPOJO();
   }
 }

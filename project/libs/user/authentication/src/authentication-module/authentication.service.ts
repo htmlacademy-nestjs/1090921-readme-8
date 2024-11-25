@@ -55,4 +55,18 @@ export class AuthenticationService {
     }
     return user;
   }
+  public async changePassword(
+    id: string,
+    { password, oldPassword }: { password: string; oldPassword: string }
+  ) {
+    const user = await this.blogUserRepository.findById(id);
+    if (!user) {
+      throw new NotFoundException(AUTH_USER_NOT_FOUND);
+    }
+    if (!(await user.comparePassword(oldPassword))) {
+      throw new UnauthorizedException(AUTH_USER_PASSWORD_WRONG);
+    }
+    await user.setPassword(password);
+    return user;
+  }
 }
