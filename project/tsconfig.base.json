@@ -21,7 +21,8 @@
       "@project/blog-user": ["libs/user/blog-user/src/index.ts"],
       "@project/core": ["libs/shared/core/src/index.ts"],
       "@project/data-access": ["libs/shared/data-access/src/index.ts"],
-      "@project/helpers": ["libs/shared/helpers/src/index.ts"]
+      "@project/helpers": ["libs/shared/helpers/src/index.ts"],
+      "@project/video-post": ["libs/blog/video-post/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
