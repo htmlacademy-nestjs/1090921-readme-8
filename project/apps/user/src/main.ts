@@ -5,6 +5,7 @@
 
 import { Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
@@ -13,7 +14,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3000;
+  
+  const configService = app.get(ConfigService);
+  const port = configService.get('application.port');
 
   const config = new DocumentBuilder().setTitle('API Documentation').setVersion('1.0').addTag('api').build();
   const document = SwaggerModule.createDocument(app, config);
