@@ -21,7 +21,6 @@ export class AuthenticationController {
     return verifiedUser.toPOJO();
   }
 
-  // Вопрос - не логичнее ли вместо auth/:id сделать маршрут users/:id?
   @Get(':id')
   public async show(@Param('id') id: string) {
     const existUser = await this.authService.getUser(id);

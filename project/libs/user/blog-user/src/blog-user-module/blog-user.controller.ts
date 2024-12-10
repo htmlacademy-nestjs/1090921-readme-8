@@ -1,6 +1,5 @@
 import { Controller, Param, Post } from '@nestjs/common';
 
-// Вопрос: ок ли делать контроллер с таким названием именно в этом модуле? Или лучше завести отдельный?
 @Controller('users')
 export class BlogUserController {
 
